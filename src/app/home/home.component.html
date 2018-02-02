@@ -1,20 +1,17 @@
-<!--
-  ~ Copyright (c) 2016 VMware, Inc. All Rights Reserved.
-  ~ This software is released under MIT license.
-  ~ The full license information can be found in LICENSE in the root directory of this project.
-  -->
-<p>This is a Clarity seed application. This is the default page that loads for the application.</p>
+<clr-datagrid>
+    <clr-dg-column [clrDgField]="'index'" class="small-column">#</clr-dg-column>
+    <clr-dg-column [clrDgField]="'title'">Titel</clr-dg-column>
+    <clr-dg-column [clrDgField]="'artist'">Artiest</clr-dg-column>
+    <clr-dg-column [clrDgField]="'points'" class="small-column">Punten</clr-dg-column>
+    <clr-dg-column [clrDgField]="'votes'"class="small-column">Stemmen</clr-dg-column>
 
-<clr-dropdown>
-    <button clrDropdownTrigger class="btn">
-        Dropdown
-        <clr-icon shape="caret down"></clr-icon>
-    </button>
-    <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
-        <a clrDropdownItem href="javascript://">Action 1</a>
-        <a clrDropdownItem href="javascript://">Action 2</a>
-        <div class="dropdown-divider"></div>
-        <a clrDropdownItem href="javascript://">Link 1</a>
-        <a clrDropdownItem href="javascript://">Link 2</a>
-    </clr-dropdown-menu>
-</clr-dropdown>
+    <clr-dg-placeholder>Er zijn nog geen stemmen uitgebracht of goedgekeurd.</clr-dg-placeholder>
+
+    <clr-dg-row *clrDgItems="let track of tracks$ | async">
+        <clr-dg-cell class="small-column">{{track.index + 1}}</clr-dg-cell>
+        <clr-dg-cell>{{track.title}}</clr-dg-cell>
+        <clr-dg-cell>{{track.artist}}</clr-dg-cell>
+        <clr-dg-cell class="small-column">{{track.points}}</clr-dg-cell>
+        <clr-dg-cell class="small-column">{{track.votes}}</clr-dg-cell>
+    </clr-dg-row>
+</clr-datagrid>
