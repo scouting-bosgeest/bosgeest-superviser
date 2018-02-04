@@ -8,12 +8,15 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AboutComponent } from './about/about.component';
 import { HomeComponent } from './home/home.component';
+import {BallotsComponent} from "./ballots/ballots.component";
+import {ApproveComponent} from "./approve/approve.component";
 
 
 export const ROUTES: Routes = [
     {path: '', redirectTo: 'home', pathMatch: 'full'},
     {path: 'home', component: HomeComponent},
-    {path: 'about', component: AboutComponent}
+    {path: 'ballots', component: BallotsComponent},
+    {path: 'approve/:id', component: ApproveComponent}
 ];
 
 export const ROUTING: ModuleWithProviders = RouterModule.forRoot(ROUTES);

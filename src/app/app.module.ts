@@ -8,13 +8,18 @@ import {ROUTING} from "./app.routing";
 import {HomeComponent} from "./home/home.component";
 import {AboutComponent} from "./about/about.component";
 import {HttpClientModule} from "@angular/common/http";
-import {DataService} from "./data.service";
+import {DataService} from "./services/data.service";
+import {BallotsComponent} from './ballots/ballots.component';
+import {BallotService} from "./services/ballot.service";
+import { ApproveComponent } from './approve/approve.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         AboutComponent,
-        HomeComponent
+        HomeComponent,
+        BallotsComponent,
+        ApproveComponent
     ],
     imports: [
         BrowserAnimationsModule,
@@ -24,7 +29,7 @@ import {DataService} from "./data.service";
         ClarityModule,
         ROUTING
     ],
-    providers: [DataService],
+    providers: [DataService, BallotService],
     bootstrap: [AppComponent]
 })
 export class AppModule {

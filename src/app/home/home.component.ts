@@ -4,7 +4,7 @@
  * The full license information can be found in LICENSE in the root directory of this project.
  */
 import {Component, OnInit} from "@angular/core";
-import {DataService} from "../data.service";
+import {DataService} from "../services/data.service";
 import {Observable} from "rxjs/Observable";
 
 @Component({

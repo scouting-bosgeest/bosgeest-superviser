@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs/Observable";
-import {TopTrack} from "./top-track";
-import {environment} from "../environments/environment";
+import {TopTrack} from "../model/top-track";
+import {environment} from "../../environments/environment";
 import {of} from "rxjs/observable/of";
 import {catchError} from "rxjs/operators";
 
@@ -16,6 +16,12 @@ export class DataService {
           catchError(this.handleError<TopTrack[]>('topTracks', []))
       );
   }
+
+    allBallots(): Observable<any> {
+        return this.http.get<any>(environment.apiUrl + `/data/ballots`).pipe(
+            catchError(this.handleError<TopTrack[]>('topTracks', []))
+        );
+    }
 
     /**
      * Handle Http operation that failed.

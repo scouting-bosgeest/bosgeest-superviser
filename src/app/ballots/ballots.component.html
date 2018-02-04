@@ -1,0 +1,69 @@
+<h1>Stembiljetten</h1>
+<p>Alle goedgekeurde, afgekeurde en openstaande stembiljetten. Je kan een stembiljet goedkeuren of
+    afkeuren door op het menu-icoon te klikken. Als je een stembiljet uitvouwt zie je de bijbehorende nummers.
+</p>
+<clr-datagrid>
+    <clr-dg-column [clrDgField]="'voter.name'">Naam</clr-dg-column>
+    <clr-dg-column [clrDgField]="'voter.email'">Email</clr-dg-column>
+    <clr-dg-column [clrDgField]="'approved'" class="status-column">Goedgekeurd</clr-dg-column>
+    <clr-dg-column [clrDgField]="'rejectReason'">Reden van Afkeuren</clr-dg-column>
+
+    <clr-dg-placeholder>Er zijn nog geen stembiljetten.</clr-dg-placeholder>
+
+    <clr-dg-row *clrDgItems="let ballot of ballots$ | async">
+        <clr-dg-action-overflow>
+            <button class="action-item" [disabled]="ballot.approved" (click)="approve(ballot)">
+                <clr-icon shape="check"></clr-icon>
+                Goedkeuren
+            </button>
+            <button class="action-item" [disabled]="!ballot.approved" (click)="showReasonModal(ballot)">
+                <clr-icon shape="times"></clr-icon>
+                Afkeuren
+            </button>
+        </clr-dg-action-overflow>
+        <clr-dg-cell>{{ballot.voter.name}}</clr-dg-cell>
+        <clr-dg-cell>{{ballot.voter.email}}</clr-dg-cell>
+        <clr-dg-cell class="status-column">
+            <clr-icon shape="check" *ngIf="ballot.approved" class="is-success"></clr-icon>
+            <clr-icon shape="times" *ngIf="!ballot.approved" class="is-error"></clr-icon>
+        </clr-dg-cell>
+        <clr-dg-cell>{{ballot.rejectReason}}</clr-dg-cell>
+        <clr-dg-row-detail *clrIfExpanded>
+            <table class="table table-compact table-row-detail">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th class="left">Titel</th>
+                    <th class="left">Artiest</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let track of ballot.tracks; let i = index">
+                    <td>{{i + 1}}</td>
+                    <td class="left">{{track.title}}</td>
+                    <td class="left">{{track.artist}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </clr-dg-row-detail>
+    </clr-dg-row>
+</clr-datagrid>
+
+
+<clr-modal [(clrModalOpen)]="reasonModalVisible">
+    <h3 class="modal-title">Stembiljet afkeuren</h3>
+    <div class="modal-body">
+        <form>
+            <section class="form-block">
+                <div class="form-group">
+                    <label class="required">Reden</label>
+                    <input type="text" id="reason" #reason autofocus>
+                </div>
+            </section>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline" (click)="cancel()">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="reject(reason.value)">Ok</button>
+    </div>
+</clr-modal>
