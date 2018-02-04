@@ -1,3 +1,70 @@
-<p>
-  approve works for id {{id}}
-</p>
+<h1>Stembiljet goedkeuren</h1>
+
+<span class="spinner spinner-lg" *ngIf="ballot == null">
+    Loading...
+</span>
+
+<div class="col-md-8" *ngIf="ballot != null">
+    <form>
+        <section class="form-block">
+            <label>Stembiljet</label>
+            <div class="form-group">
+                <label for="name">Naam</label>
+                <input type="text" id="name" value="{{ballot.voter.name}}" size="40" disabled>
+            </div>
+            <div class="form-group">
+                <label for="email">E-mail</label>
+                <input type="text" id="email" value="{{ballot.voter.email}}" size="40" disabled>
+            </div>
+            <div class="form-group">
+                <label>Nummers</label>
+                <table class="table table-compact table-row-detail">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th class="left">Titel</th>
+                        <th class="left">Artiest</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let track of ballot.tracks; let i = index">
+                        <td>{{i + 1}}</td>
+                        <td class="left">{{track.artist}}</td>
+                        <td class="left">{{track.title}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div *ngIf="!ballot.approved && ballot.rejectReason === null">
+                <button type="submit" class="btn btn-success" (click)="approve()">
+                    <clr-icon shape="check"></clr-icon> Goedkeuren
+                </button>
+                <button type="submit" class="btn btn-warning-outline" (click)="showReasonModal()">
+                    <clr-icon shape="times"></clr-icon> Afkeuren
+                </button>
+            </div>
+            <div *ngIf="ballot.approved || ballot.rejectReason != null">
+                <p>Dit stembiljet is al goedgekeurd of afgekeurd.</p>
+            </div>
+
+        </section>
+    </form>
+</div>
+
+<clr-modal [(clrModalOpen)]="reasonModalVisible">
+    <h3 class="modal-title">Stembiljet afkeuren</h3>
+    <div class="modal-body">
+        <form>
+            <section class="form-block">
+                <div class="form-group">
+                    <label class="required">Reden</label>
+                    <input type="text" id="reason" #reason autofocus>
+                </div>
+            </section>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline" (click)="cancel()">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="reject(reason.value)">Ok</button>
+    </div>
+</clr-modal>

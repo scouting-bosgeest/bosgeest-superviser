@@ -5,6 +5,7 @@ import {TopTrack} from "../model/top-track";
 import {environment} from "../../environments/environment";
 import {of} from "rxjs/observable/of";
 import {catchError} from "rxjs/operators";
+import {Ballot} from "../model/ballot";
 
 @Injectable()
 export class DataService {
@@ -19,8 +20,14 @@ export class DataService {
 
     allBallots(): Observable<any> {
         return this.http.get<any>(environment.apiUrl + `/data/ballots`).pipe(
-            catchError(this.handleError<TopTrack[]>('topTracks', []))
+            catchError(this.handleError<Ballot[]>('topTracks', []))
         );
+    }
+
+    oneBallot(id: String): Observable<Ballot> {
+      return this.http.get<Ballot>(environment.apiUrl + `/data/ballot?id=${id}`).pipe(
+          catchError(this.handleError<Ballot>('oneBallot', null))
+      );
     }
 
     /**
