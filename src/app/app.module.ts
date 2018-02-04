@@ -12,6 +12,7 @@ import {DataService} from "./services/data.service";
 import {BallotsComponent} from './ballots/ballots.component';
 import {BallotService} from "./services/ballot.service";
 import { ApproveComponent } from './approve/approve.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
     declarations: [
@@ -19,7 +20,8 @@ import { ApproveComponent } from './approve/approve.component';
         AboutComponent,
         HomeComponent,
         BallotsComponent,
-        ApproveComponent
+        ApproveComponent,
+        NotFoundComponent
     ],
     imports: [
         BrowserAnimationsModule,

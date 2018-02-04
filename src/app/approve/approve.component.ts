@@ -16,7 +16,7 @@ export class ApproveComponent implements OnInit {
     ngOnInit() {
         this.id = this.route.snapshot.paramMap.get('id');
         if (this.id === '404nf') {
-            this.router.navigate(['home']);
+            this.router.navigate(['notfound']);
         }
     }
 
