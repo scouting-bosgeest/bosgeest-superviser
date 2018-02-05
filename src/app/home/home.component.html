@@ -9,7 +9,7 @@
 
     <clr-dg-placeholder>Er zijn nog geen stemmen uitgebracht of goedgekeurd.</clr-dg-placeholder>
 
-    <clr-dg-row *clrDgItems="let track of tracks$ | async">
+    <clr-dg-row *clrDgItems="let track of tracks$ | async" [class.track-60]="track.index == 60">
         <clr-dg-cell class="small-column">{{track.index + 1}}</clr-dg-cell>
         <clr-dg-cell>{{track.title}}</clr-dg-cell>
         <clr-dg-cell>{{track.artist}}</clr-dg-cell>

@@ -47,6 +47,9 @@
             </table>
         </clr-dg-row-detail>
     </clr-dg-row>
+
+    <clr-dg-footer>{{(ballots$ | async)?.length}} Stembiljetten</clr-dg-footer>
+
 </clr-datagrid>
 
 <clr-modal [(clrModalOpen)]="reasonModalVisible">

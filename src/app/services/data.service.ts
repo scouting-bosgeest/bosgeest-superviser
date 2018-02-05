@@ -13,7 +13,7 @@ export class DataService {
   constructor(private http: HttpClient) {}
 
   topTracks(): Observable<TopTrack[]> {
-      return this.http.get<TopTrack[]>(environment.apiUrl + `/data/toptracks?count=60`).pipe(
+      return this.http.get<TopTrack[]>(environment.apiUrl + `/data/toptracks?count=500`).pipe(
           catchError(this.handleError<TopTrack[]>('topTracks', []))
       );
   }
